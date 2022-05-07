@@ -1,17 +1,18 @@
 - hosts: yandex
-  gather_facts: no
   tasks:
     - name: install git
       ansible.builtin.apt:
         name: git
         state: present
         update_cache: no
+      when: ansible_distribution == "Ubuntu"
       become: yes
       tags: git
 
     - name: update cache
       ansible.builtin.apt:
         update_cache: yes
+      when: ansible_distribution == "Ubuntu"
       become: yes
       tags: cache
       
@@ -23,6 +24,7 @@
       loop: "{{users}}"
       become: yes
       tags: user
+      when: ansible_distribution == "Ubuntu"
       notify:
         - add gitconfig
       
