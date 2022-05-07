@@ -14,3 +14,24 @@
         update_cache: yes
       become: yes
       tags: cache
+      
+    - name: add users
+      ansible.builtin.user:
+        name: "{{item}}"
+        state: present
+        password: '{{"1234" | password_hash("sha512")}}'
+      loop: "{{users}}"
+      become: yes
+      tags: user
+      notify:
+        - add gitconfig
+      
+  handlers:
+    - name: add gitconfig
+      ansible.builtin.template:
+        src: templates/gitconfig.j2
+        dest: "/home/{{item}}/.gitconfig"
+      loop: "{{users}}"
+      become: yes
+      
+        

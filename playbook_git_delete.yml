@@ -1,0 +1,18 @@
+- hosts: all
+
+  tasks:
+    - name: git deletion
+      ansible.builtin.apt:
+        name: git
+        state: absent
+        update_cache: yes
+      become: yes
+      
+    - name: delete users
+      ansible.builtin.user:
+        name: "{{item}}"
+        state: absent
+        remove: yes
+      loop: "{{users}}"
+      become: yes
+      tags: user
