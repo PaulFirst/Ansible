@@ -1,5 +1,17 @@
 - hosts: yandex
   tasks:
+    - name: install cowsay
+      ansible.builtin.apt:
+        name: cowsay
+        state: present
+      become: yes
+      tags: cowsay
+      
+    - name: cowsay say
+      command: "/usr/games/cowsay {{ server_name_full | upper }}"
+      register: cowsay_result
+      become: yes
+      
     - name: install nginx
       ansible.builtin.apt:
         name: nginx
