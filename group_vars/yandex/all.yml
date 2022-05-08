@@ -1,6 +1,7 @@
 nginx_port: 8090
 root_dir: /usr/share/nginx/html
 server_name: "{{ansible_hostname}}"
+server_name_full: "This is server {{ansible_hostname}}!"
 
 users:
   - jaime 
