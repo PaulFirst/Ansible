@@ -1,0 +1,9 @@
+- hosts: all
+  roles:
+    - role: geerlingguy.nodejs
+      version: 16
+      become: yes
+    
+    - role: geerlingguy.postgresql
+      become: yes
+
