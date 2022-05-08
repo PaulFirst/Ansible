@@ -1,0 +1,7 @@
+- hosts: all
+  
+- name: include git playbook
+  import_playbook: playbook_git.yml
+  
+- name: include nginx playbook
+  import_playbook: playbook_nginx.yml  
